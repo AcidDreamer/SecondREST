@@ -37,7 +37,6 @@ public class ApplDAOImpl implements ApplDAO {
 
 			Object queryForObject = jdbcTemplate.queryForObject(query, new Object[] { username },
 					new BeanPropertyRowMapper<Application>(Application.class));
-			logger.info("Welcome home! The client locale is {}.", queryForObject);
 			Application app = (Application) queryForObject;
 
 			return app;
