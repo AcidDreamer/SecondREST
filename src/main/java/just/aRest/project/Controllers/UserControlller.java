@@ -2,6 +2,8 @@ package just.aRest.project.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +16,6 @@ import just.aRest.project.User.Client;
 @RequestMapping(value = "/user")
 public class UserControlller {
 
-	
 	@Autowired
 	@Qualifier("UserDAO")
 	private UserDAO userDAO;
@@ -25,9 +26,19 @@ public class UserControlller {
 		if (splitArray.length != 2) {
 			Client client = null;
 			return client;
-		}else{
-			Client client = new Client(splitArray[0],splitArray[1]);
-			Client toSent = userDAO.getByLogin(client.getUsername(), client.getPassword());
+		} else {
+			Client toSent = userDAO.getByLogin(splitArray[0], splitArray[1]);
+			return toSent;
+		}
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/register")
+	public ResponseEntity<String> subscribe(@RequestBody String form) {
+		String[] splitArray = form.split(",");
+		if (splitArray.length != 2) {
+			return new ResponseEntity<>("Please fill the form", HttpStatus.NOT_ACCEPTABLE);
+		} else {
+			ResponseEntity<String> toSent = userDAO.subscribe(splitArray[0], splitArray[1]);
 			return toSent;
 		}
 	}
