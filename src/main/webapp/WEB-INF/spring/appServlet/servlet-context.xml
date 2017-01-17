@@ -65,7 +65,6 @@
 	    <beans:property name="excludedResources" value ="1.0"/>
 	</beans:bean>
 
-
 	
 	<beans:bean id="ApplDAO" class="just.aRest.project.DAO.ApplDAOImpl">
 		<beans:property name="dataSource" ref="dataSource" />
