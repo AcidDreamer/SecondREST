@@ -36,7 +36,7 @@ public class UserControlller {
 	public ResponseEntity<String> subscribe(@RequestBody String form) {
 		String[] splitArray = form.split(",");
 		if (splitArray.length != 2) {
-			return new ResponseEntity<>("Please fill the form", HttpStatus.NOT_ACCEPTABLE);
+			return new ResponseEntity<String>("Please fill the form", HttpStatus.NOT_ACCEPTABLE);
 		} else {
 			ResponseEntity<String> toSent = userDAO.subscribe(splitArray[0], splitArray[1]);
 			return toSent;

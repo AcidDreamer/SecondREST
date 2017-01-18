@@ -31,14 +31,14 @@ public class ApplDAOImpl implements ApplDAO {
 
 	@Override
 	public Application getByUsername(String username) {
-		String query = "SELECT * FROM Application WHERE USERNAME= ? LIMIT 1 ";
+		String query = "SELECT app_code,amount,repayTime,buy_type,drivers_license,taxes,tekmiriwsi,status,accepted,username"
+				+ " FROM Application WHERE USERNAME= ? AND isOnline=0 LIMIT 1 ";
 		try {
 			JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 			Object queryForObject = jdbcTemplate.queryForObject(query, new Object[] { username },
 					new BeanPropertyRowMapper<Application>(Application.class));
 			Application app = (Application) queryForObject;
-
 			return app;
 		} catch (EmptyResultDataAccessException e) {
 			Application app = new Application(0, 0, 0, "", "", 0, "", 0, 0, "");
@@ -61,21 +61,21 @@ public class ApplDAOImpl implements ApplDAO {
 					query = "INSERT INTO Director VALUES(\"\",?)";
 					checker = jdbcTemplate.update(query, app.getApp_code());
 					if (checker == 1) {
-						return new ResponseEntity<>("Opperation completed successfully", HttpStatus.OK);
+						return new ResponseEntity<String>("Opperation completed successfully", HttpStatus.OK);
 					} else {
-						return new ResponseEntity<>("Very rare issue", HttpStatus.NOT_ACCEPTABLE);
+						return new ResponseEntity<String>("Very rare issue", HttpStatus.NOT_ACCEPTABLE);
 					}
 				} else {
-					return new ResponseEntity<>("Fill the form correctly", HttpStatus.NOT_ACCEPTABLE);
+					return new ResponseEntity<String>("Fill the form correctly", HttpStatus.NOT_ACCEPTABLE);
 				}
 			} else {
-				return new ResponseEntity<>("User doesn't exist", HttpStatus.NOT_ACCEPTABLE);
+				return new ResponseEntity<String>("User doesn't exist", HttpStatus.NOT_ACCEPTABLE);
 			}
 
 		}catch (EmptyResultDataAccessException e) {
-			return new ResponseEntity<>("User doesn't exist", HttpStatus.NOT_ACCEPTABLE);
+			return new ResponseEntity<String>("User doesn't exist", HttpStatus.NOT_ACCEPTABLE);
 		}catch(NumberFormatException e){
-			return new ResponseEntity<>("Form filled incorrectly", HttpStatus.NOT_ACCEPTABLE);
+			return new ResponseEntity<String>("Form filled incorrectly", HttpStatus.NOT_ACCEPTABLE);
 		}
 		
 	}

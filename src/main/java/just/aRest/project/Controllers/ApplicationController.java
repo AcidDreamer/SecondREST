@@ -34,7 +34,6 @@ public class ApplicationController {
 	public Application getApp(@PathVariable("username") String username) {
 		Application app = applDAO.getByUsername(username);
 		return app;
-
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/createApplication")
@@ -43,7 +42,7 @@ public class ApplicationController {
 		String[] splitArray = Application.split(",");
 		if (splitArray.length != 6) {
 			Application app = null;
-			return new ResponseEntity<>("Form is filled incorrectly!", HttpStatus.OK);
+			return new ResponseEntity<String>("Form is filled incorrectly!", HttpStatus.OK);
 		} else {
 			Application app = new Application(appCode, Integer.parseInt(splitArray[0]), Integer.parseInt(splitArray[1]),
 					splitArray[2], splitArray[3], Integer.parseInt(splitArray[4]), "", 0, 0, splitArray[5]);

@@ -32,7 +32,7 @@ public class UserDAOImpl implements UserDAO {
 	public Client getByLogin(String username,String password){
 		String query = "SELECT username,password,full_name "
 				+ "FROM User "
-				+ "WHERE username =? AND PASSWORD = ?";
+				+ "WHERE username =? AND PASSWORD = ? AND role='client'";
 		try {
 			JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 			Object queryForObject = jdbcTemplate.queryForObject(query, new Object[] { username , password },
@@ -54,13 +54,13 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			int checker = jdbcTemplate.update(query,email,brand);
 			if(checker==1)
-				return new ResponseEntity<>("Opperation completed successfully", HttpStatus.OK);
+				return new ResponseEntity<String>("Opperation completed successfully", HttpStatus.OK);
 			else
-				return new ResponseEntity<>("Something went wrong", HttpStatus.NOT_ACCEPTABLE);
+				return new ResponseEntity<String>("Something went wrong", HttpStatus.NOT_ACCEPTABLE);
 		}catch (EmptyResultDataAccessException e) {
-			return new ResponseEntity<>("Something went wrong", HttpStatus.NOT_ACCEPTABLE);
+			return new ResponseEntity<String>("Something went wrong", HttpStatus.NOT_ACCEPTABLE);
 		}catch (DuplicateKeyException e) {
-			return new ResponseEntity<>("You are already subscribed", HttpStatus.NOT_ACCEPTABLE);
+			return new ResponseEntity<String>("You are already subscribed", HttpStatus.NOT_ACCEPTABLE);
 		}	
 		
 	}

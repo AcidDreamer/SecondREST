@@ -1,13 +1,12 @@
 package just.aRest.project.Appl;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
 @XmlRootElement(name = "application")
 public class Application {
 
 	int app_code;
 	int amount;
-	int repay_Time;
+	int repayTime;
 	String buy_type;
 	String drivers_license;
 	int taxes;
@@ -21,12 +20,12 @@ public class Application {
 	}
 	
 	
-	public Application(int app_code, int amount, int repay_Time, String buy_type, String drivers_license, int taxes,
+	public Application(int app_code, int amount, int repayTime, String buy_type, String drivers_license, int taxes,
 			String tekmiriwsi, int status, int accepted, String username) {
 		super();
 		this.app_code = app_code;
 		this.amount = amount;
-		this.repay_Time = repay_Time;
+		this.repayTime = repayTime;
 		this.buy_type = buy_type;
 		this.drivers_license = drivers_license;
 		this.taxes = taxes;
@@ -49,10 +48,10 @@ public class Application {
 		this.amount = amount;
 	}
 	public int getRepay_Time() {
-		return repay_Time;
+		return repayTime;
 	}
-	public void setRepay_Time(int repay_Time) {
-		this.repay_Time = repay_Time;
+	public void setRepay_Time(int repayTime) {
+		this.repayTime = repayTime;
 	}
 	public String getBuy_type() {
 		return buy_type;
