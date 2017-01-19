@@ -8,7 +8,8 @@ public class Client {
 	String password;
 	
 	public Client(){
-		
+		username="wrong";
+		password="wrong";
 	}
 	
 

@@ -22,13 +22,22 @@ public class UserControlller {
 
 	@RequestMapping(method = RequestMethod.POST, value = "/login")
 	public Client login(@RequestBody String credentials) {
-		String[] splitArray = credentials.split(",");
-		if (splitArray.length != 2) {
-			Client client = null;
+		try{
+			System.out.println("got a hit");
+			String[] splitArray = credentials.split(",");
+			if (splitArray.length != 2) {
+				System.out.println("return null because I got " + credentials);
+				Client client = new Client();
+				System.out.println("He got " + client.toString());
+				return client;
+			} else {
+				System.out.println("you have results");
+				Client toSent = userDAO.getByLogin(splitArray[0], splitArray[1]);
+				return toSent;
+			}
+		}catch(NullPointerException e){
+			Client client = new Client();
 			return client;
-		} else {
-			Client toSent = userDAO.getByLogin(splitArray[0], splitArray[1]);
-			return toSent;
 		}
 	}
 

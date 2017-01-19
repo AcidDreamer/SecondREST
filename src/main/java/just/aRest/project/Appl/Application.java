@@ -96,5 +96,13 @@ public class Application {
 		this.username = username;
 	}
 
+
+	@Override
+	public String toString() {
+		return "Application [app_code=" + app_code + ", amount=" + amount + ", repayTime=" + repayTime + ", buy_type="
+				+ buy_type + ", drivers_license=" + drivers_license + ", taxes=" + taxes + ", Tekmiriwsi=" + Tekmiriwsi
+				+ ", username=" + username + "]";
+	}
+	
 	
 }

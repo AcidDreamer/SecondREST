@@ -45,7 +45,7 @@ public class ApplicationController {
 			return new ResponseEntity<String>("Form is filled incorrectly!", HttpStatus.OK);
 		} else {
 			Application app = new Application(appCode, Integer.parseInt(splitArray[0]), Integer.parseInt(splitArray[1]),
-					splitArray[2], splitArray[3], Integer.parseInt(splitArray[4]), "", 0, 0, splitArray[5]);
+					splitArray[2], splitArray[3], Integer.parseInt(splitArray[4]), " ", 0, 0, splitArray[5]);
 			ResponseEntity<String> anApp = applDAO.createApplication(app);
 			return anApp;
 
