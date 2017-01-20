@@ -1,6 +1,7 @@
 package just.aRest.project.Appl;
 import javax.xml.bind.annotation.XmlRootElement;
 
+//this will be an XML element which will be used to respond to requests.
 @XmlRootElement(name = "application")
 public class Application {
 
