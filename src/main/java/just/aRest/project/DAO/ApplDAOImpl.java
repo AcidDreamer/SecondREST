@@ -33,8 +33,8 @@ public class ApplDAOImpl implements ApplDAO {
 	@Override
 	public Application getByUsername(String username) {
 		//get the application that the user requested,criteria : 1: username , 2: application is not online 
-		String query = "SELECT app_code,amount,repayTime,buy_type,drivers_license,taxes,tekmiriwsi,status,accepted,username"
-				+ " FROM Application WHERE USERNAME= ? AND isOnline=0 LIMIT 1 ";
+		String query = "SELECT app_code,amount,repayTime,buy_type,drivers_license,taxes,tekmiriwsi,status,accepted,username " +
+		"FROM Application WHERE username= ? AND isOnline=0 AND status =1 AND accepted=1 LIMIT 1";
 		try {
 			//open jdbc connection
 			JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
