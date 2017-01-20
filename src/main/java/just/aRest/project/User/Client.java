@@ -2,6 +2,7 @@ package just.aRest.project.User;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+//this will be an XML element which will be used to respond to requests.
 @XmlRootElement(name = "User")
 public class Client {
 	String username;

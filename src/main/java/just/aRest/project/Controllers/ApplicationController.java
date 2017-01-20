@@ -26,9 +26,6 @@ public class ApplicationController {
 	@Autowired
 	@Qualifier("ApplDAO")
 	private ApplDAO applDAO;
-
-	@Autowired
-	ApplicationService objServices;
 	
 	//Returns an xml application that was requested depending on the users ,username
 	@RequestMapping(value = "/for_user/{username}", method = RequestMethod.GET)

@@ -13,25 +13,26 @@ import just.aRest.project.DAO.UserDAO;
 import just.aRest.project.User.Client;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/user")	//Controllers handles request at /user
 public class UserControlller {
 
 	@Autowired
 	@Qualifier("UserDAO")
 	private UserDAO userDAO;
 
+	//gets POST data and sents login credentials
 	@RequestMapping(method = RequestMethod.POST, value = "/login")
 	public Client login(@RequestBody String credentials) {
 		try{
-			System.out.println("got a hit");
+			//Split string using ,
 			String[] splitArray = credentials.split(",");
+			//Check the length of the array
 			if (splitArray.length != 2) {
-				System.out.println("return null because I got " + credentials);
+				//Create and sent empty client
 				Client client = new Client();
-				System.out.println("He got " + client.toString());
 				return client;
 			} else {
-				System.out.println("you have results");
+				//else get data and return Client
 				Client toSent = userDAO.getByLogin(splitArray[0], splitArray[1]);
 				return toSent;
 			}
@@ -41,12 +42,17 @@ public class UserControlller {
 		}
 	}
 
+	//gets POST data and subscribes user to a car brands' newsletter
 	@RequestMapping(method = RequestMethod.POST, value = "/register")
 	public ResponseEntity<String> subscribe(@RequestBody String form) {
+		//Split string using ,
 		String[] splitArray = form.split(",");
+		//Check the length of the array
 		if (splitArray.length != 2) {
+			//Inform user that the form wasn't filled correctly.
 			return new ResponseEntity<String>("Please fill the form", HttpStatus.NOT_ACCEPTABLE);
 		} else {
+			//Create response and return it
 			ResponseEntity<String> toSent = userDAO.subscribe(splitArray[0], splitArray[1]);
 			return toSent;
 		}

@@ -74,10 +74,6 @@
 		<beans:property name="dataSource" ref="dataSource" />
 	</beans:bean>
 	
-	
-	<beans:bean id="objServices" class="just.aRest.project.Controllers.ApplicationService">
-	</beans:bean>
-
 	<context:component-scan base-package="just.aRest.project.Controllers" />
 
 </beans:beans>

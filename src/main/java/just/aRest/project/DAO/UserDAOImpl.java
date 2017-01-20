@@ -30,10 +30,11 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public Client getByLogin(String username,String password){
-		String query = "SELECT username,password,full_name "
+		String query = "SELECT username,password "
 				+ "FROM User "
 				+ "WHERE username =? AND PASSWORD = ? AND role='client'";
 		try {
+			//same as just.aRest.project/ApplDAOImpl->getByUsername
 			JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 			Object queryForObject = jdbcTemplate.queryForObject(query, new Object[] { username , password },
 					new BeanPropertyRowMapper<Client>(Client.class));
@@ -48,6 +49,7 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 	@Override
+	//same as just.aRest.project/ApplDAOImpl->createApp but with less checks
 	public ResponseEntity<String> subscribe(String email,String brand){
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		String query = "INSERT INTO Registered VALUES(?,?)";
